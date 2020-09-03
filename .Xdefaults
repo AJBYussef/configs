@@ -1,0 +1,11 @@
+!
+st.fonts: Fantasque Sans Mono-16;
+st.alpha: 0.87
+
+!! URxvt Appearance
+URxvt.font: xft:Fantasque Sans Mono:pixelsixe=16
+URxvt.background: black
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+
+

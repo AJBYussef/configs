@@ -1,0 +1,199 @@
+[bar/bar]
+
+monitor = ${env:MONITOR:}
+width = 100%
+height = 29
+background = ${colors.bg1}
+foreground = ${colors.fg1}
+border-left-size = 3
+border-right-size = 3
+border-color = ${colors.bg1}
+bottom = true
+
+font-0 = "Fantasque Sans Mono:size=9;3:antialias=true:autohint=true"
+font-1 = "Iosevka:size=9;3:antialias=true:autohint=true"
+font-2 = "IosevkaMediumExtended:size=9;3:antialias=true:autohint=true"
+font-3 = "FontAwesome:size=9;3:antialias=true:autohint=true"
+font-4 = "FontAwesome Solid:size=9;3:antialias=true:autohint=true"
+font-5 = "Font Awesome 5 Pro Regular:size=9;3:antialias=true:autohint=true"
+font-6 = "Font Awesome 5 Pro Solid:size=9;3:antialias=true:autohint=true"
+font-7 = "Material Icons:size=9;3:antialias=true:autohint=true"
+dpi-x = 132
+dpi-y = 132
+
+modules-left = dwm separator title
+;modules-center = title
+modules-right = network separator audio separator battery separator keylayout separator date
+tray-position = none
+
+[colors]
+
+uline1 = #908d88
+uline2 = #a46649
+uline3 = #314141
+uline4 = #FF8D8D
+fg1 = #f8f8f2
+fg2 = #afafaf
+;fg1 = #afafaf
+;bg1 = #00000000
+;bg1 = #80000000
+;bg1 = #90000000
+;bg1 = #A1000000
+;bg1 = #A6000000
+;bg1 = #BC000000
+bg1 = #BF000000
+;bg1 = #C0000000
+;bg1 = #C8000000
+;bg1 = #D0000000
+;bg1 = #D8000000
+;bg1 = #DE000000
+bg2 = #CC323841
+
+[module/audio]
+
+type = internal/pulseaudio
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+;headphone-id = 16
+;mapped = true
+format-volume = <ramp-volume><label-volume>
+label-volume = %percentage%%
+format-muted-prefix = " "
+label-muted = MUTE
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+
+scroll-up = pamixer -d 10
+scroll-down = pamixer -i 10
+
+[module/battery]
+
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+full-at = 100
+poll-interval = 5
+;time-format = %H:%M
+format-charging = <animation-charging><label-charging>
+format-charging-underline = #ffb52a
+label-charging = %percentage%% 
+;label-charging-foreground = ${xrdb:polybar.color9}
+format-discharging = <ramp-capacity><label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+label-discharging = %percentage%%
+;label-discharging-foreground = ${xrdb:polybar.color9}
+format-full = <label-full>
+format-full-prefix = " "
+;format-full-prefix-foreground = ${xrdb:polybar.color1}
+;format-full-underline = ${self.format-charging-underline}
+;label-full = %percentage%%
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
+;ramp-capacity-foreground = ${colors.foreground-alt}
+animation-charging-0 = "  "
+animation-charging-1 = "  "
+animation-charging-2 = "  "
+animation-charging-3 = "  "
+animation-charging-4 = "  "
+;animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 750
+
+[module/date]
+
+type = internal/date
+interval = 1
+date = "%a %Y-%m-%d"
+time = %H:%M:%S
+;label = %date%  %time%
+label-foreground = ${colors.fg1}
+;label-foreground = #ffbc8d
+label = "%{A1:/home/vego/.config/polybar/scripts/calendar.sh:}%{T5}%{T2} %{T1}%date%  %time%%{T2} %{A}"
+
+[module/dwm]
+
+type = internal/dwm
+format = <label-tags> <label-layout>
+
+enable-tags-click = true
+enable-layout-click = false
+enable-layout-scroll = false
+layout-scroll-wrap = false
+layout-scroll-reverse = false
+
+secondary-layout-symbol = [M]
+
+label-layout = "%{T4}%symbol% "
+label-layout-padding = 0
+label-layout-foreground = ${colors.fg2}
+label-layout-background = ${colors.bg1}
+label-floating = F
+
+label-focused = "%{T7}%{T1} "
+;label-focused-background = ${colors.bg2}
+;label-focused-foreground = ${colors.fg2}
+label-focused-foreground = #15a898
+label-focused-padding = 0
+
+label-unfocused = "%{T6}%{T1} "
+;label-unfocused-background = ${colors.bg1} 
+label-unfocused-foreground = #be6f91
+label-unfocused-padding = 0
+
+label-visible = "%{T6}%{T1} "
+label-visible-foreground = #15a898
+;label-visible-foreground = #be6f91
+label-visible-padding = 0
+
+label-urgent = "%{T7}%{T1} "
+label-urgent-foreground = #be6f91
+label-urgent-padding = 0
+
+label-empty = "%{T6}%{T1} "
+;label-empty-background = ${colors.bg1}
+label-empty-foreground = ${colors.fg2}
+;label-empty-foreground = #666666
+label-empty-padding = 0
+
+[module/keylayout]
+
+type = custom/script
+exec = /home/vego/.config/polybar/scripts/layout.sh
+tail = true
+
+format = <label>
+label = "%{T5}%{T2} %{T1}%output%"
+format-foreground = ${colors.fg1}
+;format-foreground = #fff3af
+[module/network]
+type = internal/network
+interface = wlp3s0
+interval = 3
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+;format-connected-foreground = #be6f91
+format-connected-foreground = ${colors.fg1}
+;format-disconnected-foreground = #be6f91
+format-disconnected-foreground = ${colors.fg1}
+
+label-connected = "%{A1:urxvt -e sudo nmtui:}%{T8}%{T2} %{T1}%essid%%{A}"
+label-disconnected = %{A1:urxvt -e sudo nmtui:}Not connected%{A}
+
+[module/separator]
+
+type = custom/text
+content-font = 2
+content = "   "
+
+[module/title]
+
+type = internal/xwindow
